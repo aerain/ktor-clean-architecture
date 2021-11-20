@@ -1,4 +1,4 @@
-package io.github.aerain.post
+package io.github.aerain.usecase.post
 
 import java.time.Instant
 

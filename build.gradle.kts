@@ -2,6 +2,7 @@ val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
 val prometeus_version: String by project
+val coroutines_version: String by project
 
 plugins {
     application
@@ -32,6 +33,10 @@ subprojects {
     dependencies {
         implementation(kotlin("stdlib"))
         testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
+        testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version")
+
     }
 }
 
