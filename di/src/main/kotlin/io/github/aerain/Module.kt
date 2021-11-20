@@ -6,9 +6,11 @@ import org.koin.dsl.ModuleDeclaration
 import org.koin.dsl.module
 import org.koin.java.KoinJavaComponent.getKoin
 import org.koin.ktor.ext.Koin
+import org.koin.logger.SLF4JLogger
 
 fun Application.installKoinModule() {
     install(Koin) {
+        SLF4JLogger()
         modules(postFactory)
     }
 }
