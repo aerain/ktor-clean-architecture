@@ -10,5 +10,6 @@ fun main() {
         configureHTTP()
         configureMonitoring()
         configureSerialization()
+        installKoinModule()
     }.start(wait = true)
 }
