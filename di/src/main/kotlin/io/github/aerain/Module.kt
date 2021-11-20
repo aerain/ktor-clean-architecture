@@ -17,4 +17,4 @@ fun Application.installKoinModule() {
 
 fun factory(moduleDeclaration: ModuleDeclaration) = module(createdAtStart = true, moduleDeclaration)
 
-val apis get() = getKoin().getAll<Api>()
+val apis: Set<Api> get() = getKoin().getAll<Api>().toSet()
