@@ -1,4 +1,4 @@
-package io.github.aerain
+package io.github.aerain.api
 
 import io.ktor.application.*
 import io.ktor.routing.*

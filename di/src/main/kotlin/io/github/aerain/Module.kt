@@ -1,5 +1,6 @@
 package io.github.aerain
 
+import io.github.aerain.api.Api
 import io.github.aerain.factory.postFactory
 import io.ktor.application.*
 import org.koin.dsl.ModuleDeclaration
