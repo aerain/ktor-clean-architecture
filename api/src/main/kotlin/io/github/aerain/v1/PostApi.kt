@@ -2,6 +2,7 @@ package io.github.aerain.v1
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.github.aerain.Api
 import io.github.aerain.post.GetPostUseCase
 import io.ktor.application.*
 import io.ktor.response.*
