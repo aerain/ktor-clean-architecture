@@ -5,7 +5,7 @@ val prometeus_version: String by project
 val jackson_version: String by project
 
 dependencies {
-    api(project(":api"))
+    api(project(":di"))
 
     implementation("io.ktor:ktor-server-core:$ktor_version")
     implementation("io.ktor:ktor-metrics-micrometer:$ktor_version")
