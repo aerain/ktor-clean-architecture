@@ -12,5 +12,6 @@ fun main() {
         configureMonitoring()
         configureSerialization()
         configureDatabase()
+        configureExceptionHandler()
     }.start(wait = true)
 }
