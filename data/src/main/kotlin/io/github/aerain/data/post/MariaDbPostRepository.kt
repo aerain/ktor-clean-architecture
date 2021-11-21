@@ -2,17 +2,27 @@ package io.github.aerain.data.post
 
 import io.github.aerain.entity.post.Post
 import io.github.aerain.usecase.post.PostRepository
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.map
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
+import org.jetbrains.exposed.sql.*
 
 class MariaDbPostRepository : PostRepository {
     override suspend fun findAll(offset: Long, size: Int) = Posts
         .selectAll()
         .limit(size, offset)
         .map { it.toEntity() }
+
+    override suspend fun save(post: Post): Post {
+        val result = Posts.insert {
+            it[title] = post.title
+            it[author] = post.author
+            it[postAt] = post.postAt
+        }
+        return Post(
+            result[Posts.id].value,
+            result[Posts.title],
+            result[Posts.author],
+            result[Posts.postAt]
+        )
+    }
 
     override suspend fun findById(id: Long) = Posts
         .select { Posts.id.eq(id) }

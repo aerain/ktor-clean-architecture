@@ -4,15 +4,16 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.github.aerain.api.Api
 import io.github.aerain.api.common.PaginationResponse
+import io.github.aerain.usecase.post.CreatePostUseCase
 import io.github.aerain.usecase.post.GetAllPostUseCase
 import io.github.aerain.usecase.post.GetPostUseCase
 import io.ktor.application.*
+import io.ktor.request.*
 import io.ktor.response.*
 import io.ktor.routing.*
 import io.ktor.util.*
-import kotlinx.coroutines.flow.toList
-import org.slf4j.Logger
 import java.time.Instant
+import io.github.aerain.usecase.post.CreatePostRequest as UseCaseCreatePostRequest
 
 private const val DEFAULT_PAGE: Long = 0
 private const val DEFAULT_SIZE = 20
@@ -20,6 +21,7 @@ private const val DEFAULT_SIZE = 20
 class PostApi(
     private val getUseCase: GetPostUseCase,
     private val getAllUseCase: GetAllPostUseCase,
+    private val createUseCase: CreatePostUseCase
 ) : Api({
     route("/posts") {
         get {
@@ -33,8 +35,15 @@ class PostApi(
             val id: Long by call.parameters
             call.respond(getUseCase(id))
         }
+
+        post {
+            val request = call.receive<CreatePostRequest>().toRequest()
+            call.respond(createUseCase(request))
+        }
     }
 })
+
+private fun CreatePostRequest.toRequest() = UseCaseCreatePostRequest(title, author)
 
 data class Post @JsonCreator constructor(
     @JsonProperty("title")
@@ -43,4 +52,11 @@ data class Post @JsonCreator constructor(
     val author: String,
     @JsonProperty("post_at")
     val postAt: Instant
+)
+
+data class CreatePostRequest @JsonCreator constructor(
+    @JsonProperty("title")
+    val title: String,
+    @JsonProperty("author")
+    val author: String
 )
