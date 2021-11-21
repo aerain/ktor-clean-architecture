@@ -8,9 +8,10 @@ import io.ktor.application.*
 import io.ktor.features.*
 import io.ktor.http.*
 import io.ktor.response.*
+import org.slf4j.LoggerFactory
+import java.time.Instant
 
 fun StatusPages.Configuration.exceptionHandler() {
-
     exception<NotFoundException> { cause ->
         call.respond(HttpStatusCode.NotFound, ErrorResponse(cause.message))
     }
@@ -20,12 +21,15 @@ fun StatusPages.Configuration.exceptionHandler() {
     }
 
     exception<Exception> { cause ->
+        val log = call.application.environment.log
         call.respond(HttpStatusCode.InternalServerError, ErrorResponse(cause.message))
-        throw cause
+        log.error("Exception was thrown.", cause)
     }
 }
 
 data class ErrorResponse @JsonCreator constructor(
     @JsonProperty("message")
-    val message: String?
+    val message: String?,
+    @JsonProperty("timestamp")
+    val timestamp: Instant = Instant.now()
 )
