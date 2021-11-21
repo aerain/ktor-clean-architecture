@@ -1,6 +1,7 @@
 package io.github.aerain
 
 import io.github.aerain.api.Api
+import io.github.aerain.data.config.DatabaseConfig
 import io.github.aerain.factory.postFactory
 import io.ktor.application.*
 import org.koin.dsl.ModuleDeclaration
@@ -14,6 +15,10 @@ fun Application.installKoinModule() {
         SLF4JLogger()
         modules(postFactory)
     }
+}
+
+fun Application.configureDatabase() {
+    DatabaseConfig.connect()
 }
 
 fun factory(moduleDeclaration: ModuleDeclaration) = module(createdAtStart = true, moduleDeclaration)
