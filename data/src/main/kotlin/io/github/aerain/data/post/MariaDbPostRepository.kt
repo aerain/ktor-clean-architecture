@@ -12,7 +12,6 @@ class MariaDbPostRepository : PostRepository {
     override suspend fun findAll(offset: Long, size: Int) = Posts
         .selectAll()
         .limit(size, offset)
-        .asFlow()
         .map { it.toEntity() }
 
     override suspend fun findById(id: Long) = Posts
