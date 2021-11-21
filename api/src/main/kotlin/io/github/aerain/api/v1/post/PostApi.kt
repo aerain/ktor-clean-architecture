@@ -1,7 +1,8 @@
-package io.github.aerain.api
+package io.github.aerain.api.v1.post
 
 import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
+import io.github.aerain.api.Api
 import io.github.aerain.usecase.post.GetPostUseCase
 import io.ktor.application.*
 import io.ktor.response.*
