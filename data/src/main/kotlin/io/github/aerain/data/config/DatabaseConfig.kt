@@ -1,4 +1,4 @@
-package io.github.aerain.data.post.config
+package io.github.aerain.data.config
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
