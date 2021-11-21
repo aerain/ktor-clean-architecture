@@ -15,12 +15,12 @@ object DatabaseConfig {
         Database.connect(dataSource)
     }
 
-    fun dataSource(): DataSource =
+    fun dataSource(properties: DataSourceProperties): DataSource =
         HikariConfig().apply {
-            driverClassName = "org.mariadb.jdbc.Driver"
-            jdbcUrl = "jdbc:mariadb://127.0.0.1:3306/post"
-            username = "root"
-            password = ""
-            maximumPoolSize = 5
+            driverClassName = properties.driver
+            jdbcUrl = properties.url
+            username = properties.username
+            password = properties.password
+            maximumPoolSize = properties.connectionPoolSize
         }.let(::HikariDataSource)
 }

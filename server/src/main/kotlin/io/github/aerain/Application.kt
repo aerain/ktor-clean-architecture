@@ -1,17 +1,17 @@
 package io.github.aerain
 
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
 import io.github.aerain.plugins.*
+import io.ktor.application.*
+import io.ktor.server.netty.*
 
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-        installKoinModule()
-        configureRouting()
-        configureHTTP()
-        configureMonitoring()
-        configureSerialization()
-        configureDatabase()
-        configureExceptionHandler()
-    }.start(wait = true)
+fun main(args: Array<String>) = EngineMain.main(args)
+
+fun Application.module() {
+    installKoinModule()
+    configureRouting()
+    configureHTTP()
+    configureMonitoring()
+    configureSerialization()
+    configureDatabase()
+    configureExceptionHandler()
 }
