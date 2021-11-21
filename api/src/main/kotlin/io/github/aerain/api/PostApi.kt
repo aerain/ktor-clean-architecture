@@ -6,13 +6,15 @@ import io.github.aerain.usecase.post.GetPostUseCase
 import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.routing.*
+import io.ktor.util.*
 import java.time.Instant
 
 class PostApi(
     private val getUseCase: GetPostUseCase
 ) : Api({
-    get("/post") {
-        call.respond(getUseCase())
+    get("/post/{id}") {
+        val id = call.parameters.getOrFail<Long>("id")
+        call.respond(getUseCase(id))
     }
 })
 
