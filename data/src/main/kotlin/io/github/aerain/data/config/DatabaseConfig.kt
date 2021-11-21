@@ -10,13 +10,12 @@ import kotlin.reflect.jvm.jvmName
 object DatabaseConfig {
     private val logger = LoggerFactory.getLogger(this::class.jvmName)
 
-    fun connect() {
-        logger.info("start connect database")
-        val dataSource = dataSource()
+    fun connect(dataSource: DataSource) {
+        logger.info("start connect database: {}", dataSource)
         Database.connect(dataSource)
     }
 
-    private fun dataSource(): DataSource =
+    fun dataSource(): DataSource =
         HikariConfig().apply {
             driverClassName = "org.mariadb.jdbc.Driver"
             jdbcUrl = "jdbc:mariadb://127.0.0.1:3306/post"
