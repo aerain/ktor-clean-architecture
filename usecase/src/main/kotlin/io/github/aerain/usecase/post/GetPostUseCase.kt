@@ -5,7 +5,7 @@ import java.time.Instant
 
 @UseCase
 class GetPostUseCase {
-    operator fun invoke() = Post(
+    suspend operator fun invoke() = Post(
         "The Adventures of Tom Sawyer",
         "Mark Twain",
         Instant.now()
