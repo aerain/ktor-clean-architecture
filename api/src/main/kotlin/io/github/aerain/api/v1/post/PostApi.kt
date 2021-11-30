@@ -20,7 +20,7 @@ class PostApi(
     private val getUseCase: GetPostUseCase,
     private val getAllUseCase: GetAllPostUseCase,
     private val createUseCase: CreatePostUseCase,
-    private val deletePostUseCase: DeletePostUseCase
+    private val deleteUseCase: DeletePostUseCase
 ) : Api({
     route("/posts") {
         get {
@@ -42,7 +42,7 @@ class PostApi(
 
         delete("/{id}") {
             val id: Long by call.parameters
-            call.respond(deletePostUseCase(id))
+            call.respond(deleteUseCase(id))
         }
     }
 })
