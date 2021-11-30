@@ -12,6 +12,7 @@ import io.ktor.routing.*
 import io.ktor.util.*
 import java.time.Instant
 import io.github.aerain.usecase.post.CreatePostRequest as UseCaseCreatePostRequest
+import io.github.aerain.usecase.post.UpdatePostRequest as UseCaseUpdatePostRequest
 
 private const val DEFAULT_PAGE: Long = 0
 private const val DEFAULT_SIZE = 20
@@ -20,6 +21,7 @@ class PostApi(
     private val getUseCase: GetPostUseCase,
     private val getAllUseCase: GetAllPostUseCase,
     private val createUseCase: CreatePostUseCase,
+    private val updateUseCase: UpdatePostUseCase,
     private val deleteUseCase: DeletePostUseCase
 ) : Api({
     route("/posts") {
@@ -38,6 +40,13 @@ class PostApi(
         post {
             val request = call.receive<CreatePostRequest>().toRequest()
             call.respond(createUseCase(request))
+        }
+
+        put("/{id}") {
+            val id: Long by call.parameters
+            val (title) = call.receive<UpdatePostRequest>()
+            val request = UseCaseUpdatePostRequest(id, title)
+            call.respond(updateUseCase(request))
         }
 
         delete("/{id}") {
@@ -63,4 +72,9 @@ data class CreatePostRequest @JsonCreator constructor(
     val title: String,
     @JsonProperty("author")
     val author: String
+)
+
+data class UpdatePostRequest @JsonCreator constructor(
+    @JsonProperty("title")
+    val title: String
 )

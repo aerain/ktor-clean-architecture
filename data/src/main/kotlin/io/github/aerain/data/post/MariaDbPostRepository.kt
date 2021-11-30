@@ -24,6 +24,13 @@ class MariaDbPostRepository : PostRepository {
         )
     }
 
+    override suspend fun update(post: Post): Post {
+        Posts.update({ Posts.id.eq(post.id) }) {
+            it[title] = post.title
+        }
+        return post
+    }
+
     override suspend fun deleteById(id: Long) {
         Posts.deleteWhere { Posts.id.eq(id) }
     }
