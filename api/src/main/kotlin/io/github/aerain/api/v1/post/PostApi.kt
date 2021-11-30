@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 import io.github.aerain.api.Api
 import io.github.aerain.api.common.PaginationResponse
-import io.github.aerain.usecase.post.CreatePostUseCase
-import io.github.aerain.usecase.post.GetAllPostUseCase
-import io.github.aerain.usecase.post.GetPostUseCase
+import io.github.aerain.usecase.post.*
 import io.ktor.application.*
 import io.ktor.request.*
 import io.ktor.response.*
@@ -21,7 +19,8 @@ private const val DEFAULT_SIZE = 20
 class PostApi(
     private val getUseCase: GetPostUseCase,
     private val getAllUseCase: GetAllPostUseCase,
-    private val createUseCase: CreatePostUseCase
+    private val createUseCase: CreatePostUseCase,
+    private val deletePostUseCase: DeletePostUseCase
 ) : Api({
     route("/posts") {
         get {
@@ -39,6 +38,11 @@ class PostApi(
         post {
             val request = call.receive<CreatePostRequest>().toRequest()
             call.respond(createUseCase(request))
+        }
+
+        delete("/{id}") {
+            val id: Long by call.parameters
+            call.respond(deletePostUseCase(id))
         }
     }
 })

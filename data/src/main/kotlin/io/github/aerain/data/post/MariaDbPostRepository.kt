@@ -24,6 +24,10 @@ class MariaDbPostRepository : PostRepository {
         )
     }
 
+    override suspend fun deleteById(id: Long) {
+        Posts.deleteWhere { Posts.id.eq(id) }
+    }
+
     override suspend fun findById(id: Long) = Posts
         .select { Posts.id.eq(id) }
         .singleOrNull()?.toEntity()

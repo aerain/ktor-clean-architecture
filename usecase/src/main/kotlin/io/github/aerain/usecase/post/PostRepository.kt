@@ -9,4 +9,5 @@ interface PostRepository {
     suspend fun findAll(offset: Long = DEFAULT_OFFSET, size: Int = DEFAULT_PAGE_SIZE): List<Post>
     suspend fun findById(id: Long): Post?
     suspend fun save(post: Post): Post
+    suspend fun deleteById(id: Long)
 }

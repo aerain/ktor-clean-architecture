@@ -2,21 +2,16 @@ package io.github.aerain.factory
 
 import io.github.aerain.api.Api
 import io.github.aerain.factory
-import io.github.aerain.usecase.post.GetPostUseCase
 import io.github.aerain.api.v1.post.PostApi
-import io.github.aerain.data.post.MariaDbPostRepository
-import io.github.aerain.data.post.TransactionalCreatePostUseCase
-import io.github.aerain.data.post.TransactionalGetAllPostUseCase
-import io.github.aerain.data.post.TransactionalGetPostUseCase
-import io.github.aerain.usecase.post.CreatePostUseCase
-import io.github.aerain.usecase.post.GetAllPostUseCase
-import io.github.aerain.usecase.post.PostRepository
+import io.github.aerain.data.post.*
+import io.github.aerain.usecase.post.*
 import org.koin.dsl.bind
 
 val postFactory = factory {
-    single<PostApi> { PostApi(get(), get(), get()) } bind Api::class
+    single<PostApi> { PostApi(get(), get(), get(), get()) } bind Api::class
     single<GetPostUseCase> { TransactionalGetPostUseCase(get()) }
     single<GetAllPostUseCase> { TransactionalGetAllPostUseCase(get()) }
     single<CreatePostUseCase> { TransactionalCreatePostUseCase(get()) }
+    single<DeletePostUseCase> { TransactionalDeletePostUseCase(get()) }
     single<PostRepository> { MariaDbPostRepository() }
 }
