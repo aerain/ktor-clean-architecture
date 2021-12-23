@@ -8,6 +8,7 @@ fun main(args: Array<String>) = EngineMain.main(args)
 
 fun Application.module() {
     installKoinModule()
+    configureAuthentication()
     configureRouting()
     configureHTTP()
     configureMonitoring()

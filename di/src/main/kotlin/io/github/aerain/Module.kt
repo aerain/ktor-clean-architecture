@@ -1,13 +1,8 @@
 package io.github.aerain
 
 import io.github.aerain.api.Api
-import io.github.aerain.data.config.DatabaseConfig
-import io.github.aerain.factory.dataSourceConfig
-import io.github.aerain.factory.databaseFactory
-import io.github.aerain.factory.postFactory
-import io.github.aerain.factory.registerPropertyConfig
+import io.github.aerain.factory.*
 import io.ktor.application.*
-import org.koin.core.KoinApplication
 import org.koin.dsl.ModuleDeclaration
 import org.koin.dsl.module
 import org.koin.java.KoinJavaComponent.getKoin
@@ -21,6 +16,9 @@ fun Application.installKoinModule() {
         registerPropertyConfig(this)
         modules(postFactory)
         modules(databaseFactory)
+        modules(tokenFactory)
+        modules(authFactory)
+        modules(profileFactory)
     }
 }
 
@@ -28,3 +26,5 @@ fun factory(moduleDeclaration: ModuleDeclaration) = module(createdAtStart = true
 
 val apis get() = getKoin().getAll<Api>().toSet()
 val dataSources get() = getKoin().getAll<DataSource>().toSet()
+
+inline fun <reified T: Any> getRegisteredInstance() = getKoin().get<T>()
