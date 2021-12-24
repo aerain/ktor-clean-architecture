@@ -38,17 +38,8 @@ subprojects {
     dependencies {
         implementation(kotlin("stdlib"))
         testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
-
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version")
         testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutines_version")
-
-        // Koin Rest features
-        testImplementation("io.insert-koin:koin-test:$koin_version")
-        // Koin for Ktor
-        implementation("io.insert-koin:koin-ktor:$koin_version")
-        // SLF4J Logger
-        implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
-
     }
 }
 
