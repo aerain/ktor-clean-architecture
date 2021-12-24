@@ -4,19 +4,15 @@ val logback_version: String by project
 val prometeus_version: String by project
 val coroutines_version: String by project
 val koin_version: String by project
+val java_sdk_version: String by project
 
 plugins {
-    application
     kotlin("jvm") version "1.6.0"
 }
 
 allprojects {
     group = "io.github.aerain"
     version = "0.0.1"
-}
-
-application {
-    mainClass.set("io.github.aerain.ApplicationKt")
 }
 
 subprojects {
@@ -30,6 +26,14 @@ subprojects {
 
     val implementation by configurations
     val testImplementation by configurations
+
+    tasks {
+        compileKotlin {
+            kotlinOptions {
+                jvmTarget = java_sdk_version
+            }
+        }
+    }
 
     dependencies {
         implementation(kotlin("stdlib"))
