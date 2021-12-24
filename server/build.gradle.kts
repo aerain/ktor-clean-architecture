@@ -3,9 +3,18 @@ val kotlin_version: String by project
 val logback_version: String by project
 val prometeus_version: String by project
 val jackson_version: String by project
+val java_sdk_version: String by project
 
+plugins {
+    application
+    kotlin("jvm")
+}
 
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktor_version"
+
+application {
+    mainClass.set("io.ktor.server.netty.EngineMain")
+}
 
 dependencies {
     api(project(":api"))

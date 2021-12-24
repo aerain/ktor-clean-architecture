@@ -1,0 +1,53 @@
+name: Pull Request CI
+
+on:
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      # https://github.com/actions/setup-java/issues/68
+      - name: Get Amazon Corretto 11 URL
+        id: get-amazon-corretto-11-url
+        run: >-
+          echo "::set-output name=URL::$(curl -LIs -o /dev/null -w
+          %{url_effective}
+          https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz)"
+
+      - name: Check cached Amazon Corretto
+        uses: actions/cache@v2
+        id: corretto-cache
+        with:
+          path: ./amazon-corretto-11-x64-linux-jdk.tar.gz
+          key: >-
+            ${{ runner.os }}-corretto=${{ steps.get-latest-corretto-url.outputs.URL }}
+
+      - name: Download Amazon Corretto
+        if: steps.corretto-cache.outputs.cache-hit != 'true'
+        run: >-
+          wget https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.tar.gz
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          distribution: jdkfile
+          java-version: '11'
+          architecture: x64
+          jdkFile: "./amazon-corretto-11-x64-linux-jdk.tar.gz"
+
+      - name: Grant Execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
+  dockerize:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Dockerize
+        run: ./gradlew installDist && docker build -t ktor-crud .
