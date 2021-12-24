@@ -5,7 +5,7 @@ import com.auth0.jwt.JWTCreator
 import com.auth0.jwt.algorithms.Algorithm
 import com.auth0.jwt.interfaces.DecodedJWT
 import com.auth0.jwt.interfaces.JWTVerifier
-import io.github.aerain.data.config.JwtConfig
+import io.github.aerain.data.config.JwtProperties
 import io.github.aerain.usecase.token.Context
 import io.github.aerain.usecase.token.IssueResponse
 import io.github.aerain.usecase.token.TokenProvider
@@ -15,7 +15,7 @@ import java.time.Instant
 import java.util.*
 
 class SharedSecretTokenManager(
-    private val config: JwtConfig,
+    private val config: JwtProperties,
     private val dispatcher: CoroutineDispatcher
 ) : TokenProvider, JWTVerifier {
 

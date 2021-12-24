@@ -1,16 +1,16 @@
-package io.github.aerain.factory
+package io.github.aerain.plugins
 
 import io.github.aerain.data.config.DataSourceProperties
-import io.github.aerain.data.config.JwtConfig
-import io.github.aerain.factory
+import io.github.aerain.data.config.JwtProperties
 import io.ktor.application.*
 import org.koin.core.KoinApplication
+import org.koin.dsl.module
 
 fun Application.registerPropertyConfig(koin: KoinApplication) {
     val dataSourceConfig = dataSourceConfig()
     val jwtConfig = jwtConfig()
 
-    koin.modules(factory {
+    koin.modules(module(createdAtStart = true) {
         single { dataSourceConfig }
         single { jwtConfig }
     })
@@ -27,9 +27,9 @@ fun Application.dataSourceConfig(): DataSourceProperties {
     )
 }
 
-fun Application.jwtConfig(): JwtConfig {
+fun Application.jwtConfig(): JwtProperties {
     val config = environment.config
-    return JwtConfig(
+    return JwtProperties(
         config.property("jwt.secret").getString(),
         config.property("jwt.issuer").getString(),
         config.property("jwt.audience").getString(),

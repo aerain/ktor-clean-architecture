@@ -14,5 +14,5 @@ dependencies {
     implementation("com.zaxxer:HikariCP:5.0.0")
     implementation("org.mariadb.jdbc:mariadb-java-client:$mariadb_version")
 
-    api("com.auth0:java-jwt:3.18.2")
+    implementation("com.auth0:java-jwt:3.18.2")
 }

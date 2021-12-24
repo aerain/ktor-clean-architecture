@@ -2,7 +2,7 @@ package io.github.aerain.data.config
 
 import java.time.Duration
 
-data class JwtConfig(
+data class JwtProperties(
     val secret: String,
     val issuer: String,
     val audience: String,
