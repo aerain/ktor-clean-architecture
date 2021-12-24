@@ -13,6 +13,5 @@ fun Application.module() {
     configureHTTP()
     configureMonitoring()
     configureSerialization()
-    configureDatabase()
     configureExceptionHandler()
 }

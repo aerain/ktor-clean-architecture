@@ -8,7 +8,9 @@ val jackson_version: String by project
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktor_version"
 
 dependencies {
-    api(project(":di"))
+    api(project(":api"))
+    api(project(":data"))
+
     implementation(ktor("server-core"))
     implementation(ktor("metrics-micrometer"))
     implementation(ktor("metrics"))
@@ -22,4 +24,6 @@ dependencies {
     // jackson
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:$jackson_version")
     testImplementation("io.ktor:ktor-server-tests:$ktor_version")
+
+    implementation("com.auth0:java-jwt:3.18.2")
 }
