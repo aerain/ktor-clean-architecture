@@ -5,5 +5,5 @@ import retrofit2.http.Path
 
 interface WeatherApi {
     @GET("/weathers/{region}")
-    fun findByRegion(@Path("region") region: String)
+    suspend fun findByRegion(@Path("region") region: String)
 }
