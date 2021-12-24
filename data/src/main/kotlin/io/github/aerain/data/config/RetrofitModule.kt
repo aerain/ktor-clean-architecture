@@ -1,6 +1,5 @@
 package io.github.aerain.data.config
 
-import io.github.aerain.data.config.retrofit.RetrofitFactory
 import org.koin.dsl.module
 import retrofit2.Retrofit
 
