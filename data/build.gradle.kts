@@ -1,5 +1,6 @@
 val exposed_version: String by project
 val mariadb_version: String by project
+val retrofit_version: String by project
 
 fun exposed(module: String) = "org.jetbrains.exposed:exposed-$module:$exposed_version"
 
@@ -15,4 +16,5 @@ dependencies {
     implementation("org.mariadb.jdbc:mariadb-java-client:$mariadb_version")
 
     implementation("com.auth0:java-jwt:3.18.2")
+    implementation("com.squareup.retrofit2:retrofit:$retrofit_version")
 }
