@@ -7,18 +7,17 @@ import io.ktor.application.*
 import io.ktor.response.*
 import io.ktor.request.*
 import io.ktor.routing.*
+import org.koin.ktor.ext.inject
 
 fun Application.configureMonitoring() {
-    val appMicrometerRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
+    val appMicrometerRegistry by inject<PrometheusMeterRegistry>()
 
     install(MicrometerMetrics) {
         registry = appMicrometerRegistry
-        // ...
     }
 
-
     routing {
-        get("/metrics-micrometer") {
+        get("/metrics/prometheus") {
             call.respond(appMicrometerRegistry.scrape())
         }
     }

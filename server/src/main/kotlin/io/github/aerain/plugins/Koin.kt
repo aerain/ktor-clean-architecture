@@ -1,6 +1,7 @@
 package io.github.aerain.plugins
 
 import io.github.aerain.api.apiModules
+import io.github.aerain.config.serverModules
 import io.github.aerain.data.dataModules
 import io.ktor.application.*
 import org.koin.ktor.ext.*
@@ -25,5 +26,6 @@ fun Application.installKoinModule() {
 
 val modules = listOf(
     apiModules,
-    dataModules
+    dataModules,
+    serverModules
 ).flatten()
