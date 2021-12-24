@@ -49,5 +49,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
+      - uses: actions/checkout@v2
       - name: Dockerize
         run: ./gradlew installDist && docker build -t ktor-crud .
