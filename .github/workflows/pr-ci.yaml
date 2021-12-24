@@ -45,10 +45,5 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-  dockerize:
-    runs-on: ubuntu-20.04
-    needs: build
-    steps:
-      - uses: actions/checkout@v2
       - name: Dockerize
         run: ./gradlew installDist && docker build -t ktor-crud .
