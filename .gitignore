@@ -6,3 +6,6 @@
 
 # build output
 build/
+
+# vscode output
+bin/
