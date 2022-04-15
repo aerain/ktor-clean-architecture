@@ -15,6 +15,7 @@ jobs:
           - 6379:6379
         env:
           MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
+          MARIADB_DATABASE: post
 
     steps:
       - uses: actions/checkout@v2
@@ -56,5 +57,5 @@ jobs:
 
       - name: Dockerize
         run: >-
-          export EXPOSED_DATASOURCE_URL=mariadb
+          export EXPOSED_DATASOURCE_URL=jdbc:mysql://mariadb:3306/post
           ./gradlew installDist && docker build -t ktor-crud .
