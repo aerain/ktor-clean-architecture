@@ -30,6 +30,7 @@ dependencies {
     implementation(ktorServer("auth-jwt"))
     implementation(ktorServer("content-negotiation"))
     implementation(ktorServer("status-pages"))
+    implementation(ktorServer("cors"))
     implementation(ktor("serialization-jackson"))
     implementation("io.micrometer:micrometer-registry-prometheus:$prometeus_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")

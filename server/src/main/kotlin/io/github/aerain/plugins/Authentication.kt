@@ -1,10 +1,10 @@
 package io.github.aerain.plugins
 
 import com.auth0.jwt.interfaces.JWTVerifier
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.auth.jwt.*
-import org.koin.ktor.ext.get
+import io.github.aerain.config.ktor.ext.get
+import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.auth.jwt.*
 
 fun Application.configureAuthentication() {
     install(Authentication) {

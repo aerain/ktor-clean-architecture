@@ -4,11 +4,11 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import io.github.aerain.api.Api
 import io.github.aerain.usecase.token.Context
 import io.github.aerain.usecase.token.IssueTokenUseCase
-import io.ktor.application.*
-import io.ktor.auth.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.auth.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 
 class AuthApi(
     val issueToken: IssueTokenUseCase

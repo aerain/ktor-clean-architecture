@@ -16,7 +16,7 @@ fun Application.installKoinModule() {
     }
     install(Koin) {
         SLF4JLogger()
-        registerPropertyConfig(this)
+        registerPropertyConfig()
         modules(modules)
     }
     environment.monitor.subscribe(KoinApplicationStopPreparing) {
