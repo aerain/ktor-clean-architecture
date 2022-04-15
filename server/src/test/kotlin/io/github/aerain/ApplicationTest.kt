@@ -1,27 +1,27 @@
 package io.github.aerain
 
-import io.ktor.application.*
+import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
-import io.ktor.response.*
-import io.ktor.routing.*
+import io.ktor.server.application.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
 import io.ktor.server.testing.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ApplicationTest {
     @Test
-    fun testRoot() {
-        withTestApplication({
-            routing {
-                get {
-                    call.respond("Hello World!")
-                }
-            }
-        }) {
-            handleRequest(HttpMethod.Get, "/").apply {
-                assertEquals(HttpStatusCode.OK, response.status())
-                assertEquals("Hello World!", response.content)
+    fun testRoot() = testApplication {
+        routing {
+            get {
+                call.respond("Hello, world!")
             }
         }
+
+        val response = client.get("/")
+        assertEquals(HttpStatusCode.OK, response.status)
+        assertEquals("Hello, world!", response.bodyAsText())
     }
+
 }

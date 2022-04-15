@@ -1,19 +1,20 @@
 package io.github.aerain.plugins
 
+import io.github.aerain.config.ktor.ext.koin
 import io.github.aerain.data.config.DataSourceProperties
 import io.github.aerain.data.config.JwtProperties
-import io.ktor.application.*
+import io.ktor.server.application.*
 import org.koin.core.KoinApplication
 import org.koin.dsl.module
 
-fun Application.registerPropertyConfig(koin: KoinApplication) {
+fun Application.registerPropertyConfig() {
     val dataSourceConfig = dataSourceConfig()
     val jwtConfig = jwtConfig()
 
-    koin.modules(module(createdAtStart = true) {
+    koin.loadModules(listOf(module(createdAtStart = true) {
         single { dataSourceConfig }
         single { jwtConfig }
-    })
+    }))
 }
 
 fun Application.dataSourceConfig(): DataSourceProperties {

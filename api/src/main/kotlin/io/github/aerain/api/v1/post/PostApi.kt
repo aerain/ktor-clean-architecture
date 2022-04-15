@@ -5,11 +5,11 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import io.github.aerain.api.Api
 import io.github.aerain.api.common.PaginationResponse
 import io.github.aerain.usecase.post.*
-import io.ktor.application.*
-import io.ktor.request.*
-import io.ktor.response.*
-import io.ktor.routing.*
-import io.ktor.util.*
+import io.ktor.server.application.*
+import io.ktor.server.request.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import io.ktor.server.util.*
 import java.time.Instant
 import io.github.aerain.usecase.post.CreatePostRequest as UseCaseCreatePostRequest
 import io.github.aerain.usecase.post.UpdatePostRequest as UseCaseUpdatePostRequest
