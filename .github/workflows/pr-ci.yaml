@@ -21,7 +21,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setting Up DB
       # https://github.com/actions/setup-java/issues/68
       - name: Get Amazon Corretto 11 URL
         id: get-amazon-corretto-11-url
