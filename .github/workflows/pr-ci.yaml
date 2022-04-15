@@ -5,8 +5,9 @@ on:
     branches: [ develop ]
 
 jobs:
-  container-job:
+  build:
     runs-on: ubuntu-20.04
+
     services:
       mariadb:
         image: mariadb:10
@@ -15,8 +16,6 @@ jobs:
         env:
           MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
 
-  build:
-    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
 
