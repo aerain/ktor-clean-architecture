@@ -11,6 +11,7 @@ plugins {
 }
 
 fun ktor(module: String) = "io.ktor:ktor-$module:$ktor_version"
+fun ktorServer(module: String) = ktor("server-$module")
 fun koin(module: String) = "io.insert-koin:koin-$module:$koin_version"
 
 application {
@@ -21,13 +22,15 @@ dependencies {
     api(project(":api"))
     api(project(":data"))
 
-    implementation(ktor("server-core"))
-    implementation(ktor("metrics-micrometer"))
-    implementation(ktor("metrics"))
-    implementation(ktor("jackson"))
-    implementation(ktor("server-netty"))
-    implementation(ktor("auth"))
-    implementation(ktor("auth-jwt"))
+    implementation(ktorServer("core"))
+    implementation(ktorServer("metrics-micrometer"))
+    implementation(ktorServer("metrics"))
+    implementation(ktorServer("netty"))
+    implementation(ktorServer("auth"))
+    implementation(ktorServer("auth-jwt"))
+    implementation(ktorServer("content-negotiation"))
+    implementation(ktorServer("status-pages"))
+    implementation(ktor("serialization-jackson"))
     implementation("io.micrometer:micrometer-registry-prometheus:$prometeus_version")
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
