@@ -53,10 +53,9 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Gradle
-        run: >-
+        run: | 
           export EXPOSED_DATASOURCE_URL=jdbc:mysql://mariadb:3306/post
           ./gradlew clean test
 
       - name: Dockerize
-        run: >-
-          ./gradlew installDist && docker build -t ktor-crud .
+        run: ./gradlew installDist && docker build -t ktor-crud .
