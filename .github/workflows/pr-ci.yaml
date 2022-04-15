@@ -5,6 +5,16 @@ on:
     branches: [ develop ]
 
 jobs:
+  container-job:
+    runs-on: ubuntu-20.04
+    services:
+      mariadb:
+        image: mariadb:10
+        ports:
+          - 6379:6379
+        env:
+          MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
+
   build:
     runs-on: ubuntu-20.04
     steps:
@@ -46,4 +56,6 @@ jobs:
         run: ./gradlew clean build
 
       - name: Dockerize
-        run: ./gradlew installDist && docker build -t ktor-crud .
+        run: >-
+          export EXPOSED_DATASOURCE_URL=mariadb
+          ./gradlew installDist && docker build -t ktor-crud .
