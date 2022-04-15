@@ -12,7 +12,7 @@ jobs:
       mariadb:
         image: mariadb:10
         ports:
-          - 6379:6379
+          - 3306:3306
         env:
           MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: true
           MARIADB_DATABASE: post
